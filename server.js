@@ -20,7 +20,7 @@ app.use(express.urlencoded({ extended: true }));
  * CWA 氣象資料開放平臺 API
  * 使用「一般天氣預報-今明 36 小時天氣預報」資料集
  */
-const getKaohsiungWeather = async (req, res) => {
+const getTaipeiWeather = async (req, res) => {
   try {
     // 檢查是否有設定 API Key
     if (!CWA_API_KEY) {
@@ -42,7 +42,7 @@ const getKaohsiungWeather = async (req, res) => {
       }
     );
 
-    // 取得台北市的天氣資料
+    // 取得臺北市的天氣資料
     const locationData = response.data.records.location[0];
 
     if (!locationData) {
@@ -142,7 +142,7 @@ app.get("/api/health", (req, res) => {
 });
 
 // 取得台北市天氣預報
-app.get("/api/weather/taipei", getKaohsiungWeather);
+app.get("/api/weather/taipei", getTaipeiWeather);
 
 // Error handling middleware
 app.use((err, req, res, next) => {
